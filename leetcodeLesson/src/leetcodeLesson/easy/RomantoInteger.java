@@ -18,30 +18,69 @@ import java.util.Map;
 public class RomantoInteger {
 
 	public static void main(String[] args) {
-		System.out.println( "Roman to Integer :"+ romanToInt("") );
+		
+		String[] example = {"III", "IV", "IX", "LVIII", "MCMXCIV"};
+		
+		for( String exStr : example ) {
+			System.out.println( exStr + "\t to Integer :\t"+ romanToInt(exStr) );
+		}
 	}
 	
 	public static int romanToInt(String s) {
 		
-		Map<String, Integer> romanMap = new HashMap<String, Integer>();
-		romanMap.put("I", 1);
-		romanMap.put("V", 5);
-		romanMap.put("X", 10);
-		romanMap.put("L", 50);
-		romanMap.put("C", 100);
-		romanMap.put("D", 500);
-		romanMap.put("M", 1000);
+		Map<Character, Integer> romanMap = new HashMap<Character, Integer>();
+		romanMap.put('I', 1);
+		romanMap.put('V', 5);
+		romanMap.put('X', 10);
+		romanMap.put('L', 50);
+		romanMap.put('C', 100);
+		romanMap.put('D', 500);
+		romanMap.put('M', 1000);
 		
-		int sl = s.length();
-		int result = 0;
+		int result = 0; // 結果
 		
-		for (int i=0 ; i<sl ; i++) {
-			switch(s.charAt(i)) {
-			case 'I':
+		char[] chars = s.toCharArray();
+		int pre = 1000;
+		for ( char c : chars ) {
+			int cur = romanMap.get(c);
+			result += cur;
+			if( cur > pre ) {
+				result = result - (2*pre);
 			}
-		} 
+			pre = cur;
+		}
 		
-		
-        return 0;
+        return result;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
