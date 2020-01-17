@@ -1,0 +1,31 @@
+/**
+ * Given two non-negative integers num1 and num2 represented as string, 
+ * return the sum of num1 and num2.
+ */
+
+package leetcodeLesson.easy;
+
+public class AddStrings {
+
+	public static void main(String[] args) {
+		System.out.println( addStrings("51189", "967895") );
+	}
+	
+	public static String addStrings(String num1, String num2) {
+		StringBuilder res = new StringBuilder("");
+		int i = num1.length()-1, j = num2.length()-1;
+		int carry = 0;
+		
+		while( i>=0 || j>=0 ){
+			int n1 = i>=0 ? num1.charAt(i) - '0' : 0;
+			int n2 = j>=0 ? num2.charAt(j) - '0' : 0;
+			int tmp = n1 + n2 + carry;
+			carry = tmp / 10;
+			res.append(tmp % 10);
+			
+			i--; j--;
+		}
+		return carry==1 ? res.append(1).reverse().toString() : res.reverse().toString();
+	}
+
+}
